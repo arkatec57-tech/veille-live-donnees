@@ -1,5 +1,5 @@
 #!/bin/bash
-# Mise a jour hebdomadaire du tableau des scenarios de Veille Live (tache programmee) :
+# Mise a jour hebdomadaire du tableau des scenarios et des robots de Veille Live (tache programmee) :
 # collecte (liste Nasdaq, Yahoo journalier 10 ans et horaire 2 ans, calendrier des resultats), rejeu, synthese, scenarios.json.
 # Usage : bash maj_hebdo.sh <dossier de travail>   (environ 1 h 30)
 set -e
@@ -17,4 +17,10 @@ python3 export.py > export.log && python3 gen_app.py
 python3 - <<'PY'
 import json; d = json.load(open("scenarios.json")); n = len(d["L"])
 assert n > 100, f"tableau trop court ({n})"; print("tableau", d["info"], n, "scenarios")
+PY
+# v2.12 : les deux robots (swing, day trading) : rejeu des regles sur les donnees a jour, robots.json
+python3 bt_swing2.py > bt_swing2.log 2>&1 && TRI=rsi MAXP=5 python3 bt_swing3.py > bt_swing3.log 2>&1 && python3 bt_day2.py > bt_day2.log 2>&1
+VL_SORTIE_JSON="$W/robots.json" python3 gen_robots.py > gen_robots.log
+python3 - <<'PY'
+import json; r = json.load(open("robots.json")); assert r["swing"]["mesure"]["P1"]["n"] > 500 and r["day"]["mesure"]["P2"]["n"] > 500; print("robots", r["info"]["date"], r["swing"]["verdict"], r["day"]["verdict"])
 PY
