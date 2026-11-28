@@ -1,6 +1,6 @@
 {
  "info": {
-  "date": "2026-11-27",
+  "date": "2026-11-28",
   "methode": "Règles choisies sur la 1re période, confirmées sur la 2de ; achat au prix vendeur, vente au prix acheteur (écart 0,05 %), frais exclus. Données : actions cotées aujourd'hui (celles qui ont disparu manquent, résultats un peu flatteurs)."
  },
  "swing": {
@@ -16,62 +16,62 @@
   },
   "mesure": {
    "P1": {
-    "n": 1764,
-    "win": 70.0,
+    "n": 1627,
+    "win": 70.3,
     "esp": 0.85,
-    "mg": 3.2,
-    "mp": -4.63,
+    "mg": 3.06,
+    "mp": -4.35,
     "sorties": {
-     "moy5": 1532,
-     "stop": 153,
-     "duree": 79
+     "moy5": 1416,
+     "stop": 146,
+     "duree": 65
     },
     "du": "2016-11",
     "au": "2021-06"
    },
    "P2": {
-    "n": 3036,
-    "win": 63.8,
-    "esp": 0.42,
-    "mg": 2.91,
-    "mp": -3.96,
+    "n": 2821,
+    "win": 64.1,
+    "esp": 0.46,
+    "mg": 2.83,
+    "mp": -3.76,
     "sorties": {
-     "moy5": 2619,
-     "duree": 242,
-     "stop": 175
+     "moy5": 2454,
+     "duree": 202,
+     "stop": 165
     },
     "du": "2021-07",
     "au": "2026-11"
    },
    "an": {
-    "n": 707,
-    "win": 61.7,
-    "esp": 0.12,
-    "mg": 2.83,
-    "mp": -4.26
+    "n": 631,
+    "win": 62.0,
+    "esp": 0.11,
+    "mg": 2.72,
+    "mp": -4.15
    },
    "portefeuille": {
     "P1": {
-     "annuel": 14.4,
-     "pire_baisse": -33.3,
+     "annuel": 8.2,
+     "pire_baisse": -37.8,
      "sp500_annuel": 17.4,
-     "trades": 680,
-     "win": 67.2,
-     "esp": 0.43
+     "trades": 642,
+     "win": 66.2,
+     "esp": 0.29
     },
     "P2": {
-     "annuel": 9.5,
-     "pire_baisse": -20.6,
-     "sp500_annuel": 11.5,
-     "trades": 1196,
-     "win": 61.5,
-     "esp": 0.24
+     "annuel": 13.3,
+     "pire_baisse": -21.3,
+     "sp500_annuel": 11.7,
+     "trades": 1154,
+     "win": 62.1,
+     "esp": 0.33
     },
     "total": {
-     "annuel": 11.6,
-     "pire_baisse": -33.3,
+     "annuel": 11.3,
+     "pire_baisse": -37.8,
      "sp500_annuel": 14.0,
-     "trades": 1876
+     "trades": 1796
     }
    },
    "temoin": {
@@ -94,36 +94,36 @@
   },
   "mesure": {
    "P1": {
-    "n": 5541,
-    "win": 45.5,
-    "esp": 0.56,
-    "mg": 5.37,
-    "mp": -3.46,
+    "n": 3429,
+    "win": 48.3,
+    "esp": 0.38,
+    "mg": 4.33,
+    "mp": -3.3,
     "du": "2024-01",
     "au": "2025-05"
    },
    "P2": {
-    "n": 6761,
-    "win": 41.8,
-    "esp": 0.14,
-    "mg": 5.06,
-    "mp": -3.39,
+    "n": 4327,
+    "win": 45.1,
+    "esp": 0.1,
+    "mg": 4.12,
+    "mp": -3.19,
     "du": "2025-06",
     "au": "2026-11"
    },
    "P2_ecart_large": {
-    "n": 6761,
-    "win": 40.3,
-    "esp": -0.06,
-    "mg": 4.99,
-    "mp": -3.47
+    "n": 4327,
+    "win": 43.2,
+    "esp": -0.1,
+    "mg": 4.06,
+    "mp": -3.27
    },
    "an": {
-    "n": 5041,
-    "win": 41.3,
-    "esp": -0.01,
-    "mg": 4.79,
-    "mp": -3.37
+    "n": 3522,
+    "win": 44.6,
+    "esp": 0.04,
+    "mg": 4.05,
+    "mp": -3.2
    },
    "temoin": {
     "P1": -0.094,
