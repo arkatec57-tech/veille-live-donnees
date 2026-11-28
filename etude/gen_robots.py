@@ -21,6 +21,22 @@ day = dict(nom="Robot day trading", regle=dict(ecart_min=-10, ecart_max=-5, prix
         P2_ecart_large=per(g[g.per == "P2"], 0.0015), an=per(g[g.t >= an], 0.0005), temoin=dict(P1=-0.094, P2=-0.142)))
 p1, p2 = day["mesure"]["P1"]["esp"], day["mesure"]["P2"]["esp"]
 day["verdict"] = "avantage" if p1 > 0.2 and p2 > 0.2 else "observation"
+
+# v2.14 : variantes (robots évolutifs) : chaque réglage de la grille, mesuré sur la 1re période (choix) et la 2de (contrôle hors échantillon)
+sw2a = pd.read_parquet(f"{D}/bt_swing2.parquet")
+def vs_sw(k):
+    r, s_, n, so = k.split("_"); return dict(rsi_max=int(r[1:]), stop_atr=float(s_[1:]), max_seances=int(n[1:]), sortie="moy5" if so == "s5" else "obj")
+def vs_day(k):
+    p = k.split("_"); g0, g1 = float(p[0][1:]), float(p[1]); o = p[3][1:]; st_ = p[4][1:]
+    return dict(ecart_min=g0, ecart_max=g1, prix_min=float(p[2][1:]), tp_pct=None if o == "None" else float(o), stop_pct=None if st_ == "None" else float(st_), qqq=p[5][3] if len(p) > 5 else None)
+VS = []
+for k, g in sw2a[sw2a.k != "base_aleat"].groupby("k"):
+    VS.append(dict(k=k, regle=vs_sw(k), P1=stats(g[g.per == "P1"]), P2=stats(g[g.per == "P2"]), an=stats(g[g.t >= an])))
+VD = []
+for k, g in d2[d2.sl == 0.0005].groupby("k"):
+    VD.append(dict(k=k, regle=vs_day(k), P1=stats(g[g.per == "P1"]), P2=stats(g[g.per == "P2"]), an=stats(g[g.t >= an])))
+swing["cle"] = "r30_s3.0_n7_s5"; day["cle"] = K
+swing["variantes"] = [v for v in VS if v["P1"] and v["P2"]]; day["variantes"] = [v for v in VD if v["P1"] and v["P2"]]
 out = dict(info=dict(date=date, methode="Règles choisies sur la 1re période, confirmées sur la 2de ; achat au prix vendeur, vente au prix acheteur (écart 0,05 %), frais exclus. Données : actions cotées aujourd'hui (celles qui ont disparu manquent, résultats un peu flatteurs)."), swing=swing, day=day)
 js = os.environ.get("VL_SORTIE_JS", f"{D}/robots.js"); jn = os.environ.get("VL_SORTIE_JSON", f"{D}/robots.json")
 open(js, "w").write("// généré par gen_robots.py : règles des robots et ce que le rejeu sur l'historique a mesuré\nwindow.VL = window.VL || {}; window.VL.ROBOTS = " + json.dumps(out, ensure_ascii=False, separators=(",", ":")) + ";\n")
